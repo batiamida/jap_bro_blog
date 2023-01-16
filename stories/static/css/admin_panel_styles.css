@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;500&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:vizited {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+body {
+  width: 99%;
+}
+
+.main_create_card {
+  font-family: "Roboto Mono", monospace;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 40px 20px;
+  margin: 0 -15px;
+  
+}
+.main_create_card form {
+  padding: 20px 20px;
+}
+
+.create_card__form {
+  padding: 10px 30px;
+  width: 40%;
+  margin: 15px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: rgba(169, 169, 169, 0.7);
+}
+.create_card .create_card__input {
+  opacity: 0.7;
+  border: 2px solid #D1C2BD;
+  padding: 3px;
+  background-color: #f2f3f4;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.create_card .create_card__input:focus {
+  opacity: 0.9;
+  -webkit-box-shadow: 1px 1px 7px 1px #33FF99;
+          box-shadow: 1px 1px 7px 1px #33FF99;
+}
+.create_card input[type=file]::-webkit-file-upload-button {
+  border: none;
+  width: 100px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #778899;
+  color: #fefefa;
+}
+.create_card input[type=file]::file-selector-button {
+  border: none;
+  width: 100px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #778899;
+  color: #fefefa;
+}
+.create_card textarea {
+  opacity: 0.7;
+  border: 2px solid #D1C2BD;
+  max-width: 90%;
+  min-width: 90%;
+  padding: 10px;
+  background-color: #f2f3f4;
+  margin: 10px 0 0 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.create_card textarea:focus {
+
+  opacity: 0.9;
+  -webkit-box-shadow: #33FF99 0px 1px 4px;
+          box-shadow: #33FF99 0px 1px 4px;
+}
+.create_card__title {
+  display: inline-block;
+}
+
+.submit_button {
+  opacity: 0.75;
+  padding: 5px;
+  letter-spacing: 2px;
+  background-color: #fff;
+  font-size: 20px;
+  width: 100px;
+  border-radius: 4px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.submit_button:hover {
+  background-color: rgba(119, 136, 153, 0.8);
+}
+
+.create_card__list {
+  line-height: 40px;
+}
+
+.create_card__title {
+  color: #fff;
+  font-size: 16px;
+}
+
+.create_themes {
+  margin: 0 300px 0 0;
+}
+.create_themes__submit_button {
+  margin: 20px 0 0 40px;
+}
+.create_themes__title {
+  display: block;
+  text-align: center;
+  margin: 10px;
+}
+
+.video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.video__item {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.create_city__title {
+  display: block;
+  margin: 10px 65px;
+}
+
+.create_card__column{
+  display: flex;
+  justify-content: space-around;
+ 
+}
+
+.message{
+        position: relative;
+        top: 25px;
+        left: 40%;
+        
+         display: inline;
+         padding: 8px;
+         border-radius: 15px;
+         
+      }
+
+      .success{
+      background-color: #BCFF9C;
+       color: #2C9A00;
+      }
+      .success:after{
+        content: '✔';
+      }
+      .info{
+        color: #8A7642;
+        background-color: #FEFFCB;
+      }
+
+      .info:after{
+        content: '🛈';
+
+
+      }
+

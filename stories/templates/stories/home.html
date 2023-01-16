@@ -1,0 +1,136 @@
+{% extends 'stories/base.html' %}
+
+{% load static %}
+
+
+{% block title %} home {% endblock title %}
+
+{% block link %}{% endblock link %}
+
+
+
+{% block content %}
+
+
+{% block header_navbar %}
+<nav class="top__menu topmenu">
+    <div class="topmenu__tags">
+        <a  onclick='return false'><li>Themes</li></a>
+        <ul data-simplebar></ul>
+    </div>
+    <div class="topmenu__cities">
+        <a ><li>Cities</li></a>
+        <ul data-simplebar></ul>
+    </div>
+</nav>
+{% endblock header_navbar %}
+
+
+	{% load stories_extras %}
+
+{% if messages %}
+	{% for message in messages %}
+		{{ message }}
+	{% endfor %}
+{% endif %}
+
+
+		<div class="welcome">
+			<div class="welcome__logo">
+				<img src="{% static 'icons/logo_icon.png' %}">
+			</div>
+			<div class="welcome__text">
+				<h2>this blog about <span>Japanese</span></h2>
+			</div>
+			<div class="welcome__images">
+				<div class="welcome__images_image">
+					<img src="{% static 'icons/019-noodles.png' %}">
+					<div><p>Food</p></div>
+				</div>
+				<div class="welcome__images_image">
+
+					<img src="{% static 'icons/016-maneki neko.png' %}">
+					<p>Culture</p>
+				</div>
+
+				<div class="welcome__images_image">
+					<img src="{% static 'icons/029-fuji.png' %}">
+					<p>Cool places</p>
+				</div>
+			</div>
+			<div class="welcome__bottom">
+				<div class="welcome__bottom_image">
+					<img src="{% static 'images/main_bg.png' %}">
+				</div>
+				<div class="welcome__bottom_image">
+					<img src="{% static 'images/main_bg.png' %}">
+				</div>
+				<div class="welcome__bottom_image">
+					<img src="{% static 'images/main_bg.png' %}">
+				</div>
+				<div class="welcome__bottom_image">
+					<img src="{% static 'images/main_bg.png' %}">
+				</div>
+			</div>
+		</div>
+		<main class="main">
+			<div class="main__block">
+				<div class="main__block_links">
+				{% for top_post in top_posts %}
+					<a href="{% url 'story-page' pk=top_post.id %}"><button>Go to the page<i class='fas fa-chevron-down'></i></button></a>
+				{% endfor %}
+				</div>
+				<div class="main__block_slider slider">
+					{% for top_post in top_posts %}
+					<div class="slider__container">
+						<div class="slider__container_content">
+							<img src="{{ top_post.main_image.url }}">
+							<p>{{ top_post }}</p>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+
+				<div class="main__block_images images images_margin">
+					{% for post in posts %}
+					<div class="images__container">
+						<div class="images__container_content">
+							<a href="{% url 'story-page' pk=post.id %}"><img src="{{ post.main_image.url }}"></a>
+							<p>{{ post }}</p>
+
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+
+		</main>
+		
+
+	
+
+	<div class="pages">
+		{% if posts.has_previous %}
+			<div class="pages__button"><a id ='previous' href="{% my_url posts.previous_page_number 'page' request.GET.urlencode %}"><img src="{% static 'icons/next.svg' %}"></a></div>
+		{% else %}
+			<div class="pages__button"><a id ='previous' style = 'opacity:0.4'><img src="{% static 'icons/next.svg' %}"></a></div>
+		{% endif %}
+
+		{% if posts.has_next %}
+			<div class="pages__button"><a id ='next_btn' href="{% my_url posts.next_page_number 'page' request.GET.urlencode %}"><img src="{% static 'icons/next.svg' %}"></a></div>
+		{% else %}
+			<div class="pages__button"><a id ='next_btn' style = 'opacity:0.4'><img src="{% static 'icons/next.svg' %}"></a></div>
+		{% endif %}
+
+	</div>
+
+	<form id='formToSubmitFilter' method="GET">
+		{% with filter.form as form %}
+			{{ form }}
+		{% endwith %}
+		<button type="submit" id="button_submit_filter">special</button>
+	</form>
+	
+
+{% endblock content %}
+

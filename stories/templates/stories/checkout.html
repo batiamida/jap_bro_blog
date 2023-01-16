@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>checkout page</title>
+</head>
+<body>
+
+	
+	
+	<input name='total_amount' placeholder="Enter amount" id='inputPayPal'>
+	
+
+
+
+	 <div id="paypal-button-container"></div>
+	 <script src="https://www.paypal.com/sdk/js?client-id=AeIL4kVp5nZnwh9lt36zHZ8zASj7G_xSuXFxyNHI2kfGdtzsabFlIS2ZGxlJLwKSG3ul8mCpgUBamJcm&currency=USD"></script>
+     {% csrf_token %}
+     <script type="text/javascript">const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;</script>
+	
+     <script>
+        // Render the PayPal button into #paypal-button-container
+        
+         
+
+        paypal.Buttons({
+
+            
+         
+
+        	style: {
+                color:  'silver',
+                shape:  'rect',
+                label:  'pay',
+                height: 40,
+                
+            },
+
+     //         onError: function (err) {
+   		// 		 // For example, redirect to a specific error page
+  			//   window.location.href = "{% url 'home' %}";
+  			// },
+
+
+
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: parseFloat(total).toFixed(2)
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    submitFormData();
+                    
+
+                    // Replace the above to show a success message within this page, e.g.
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '';
+                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+
+      
+       
+
+
+    </script>
+
+    <script type="text/javascript">
+    let amount = '';
+
+        const inputPayPal = document.getElementById('inputPayPal');
+        inputPayPal.addEventListener('keyup', function() {
+            total = inputPayPal.value.toString();
+        }),
+
+
+        function submitFormData(){
+            console.log('Payment button was clicked')
+
+            var userFormData = {
+                'amount': amount,
+            }
+
+            
+        
+            var url = '{% url "home" %}'
+            fetch(url,{
+                method:'POST',
+                headers:{
+                    'Content-type':'application/json',
+                    'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({'form':userFormData})
+            })
+
+            .then((response) => {
+            return response.json() //Convert response to JSON
+             })
+          }
+    </script>
+</body>
+</html>

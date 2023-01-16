@@ -1,0 +1,80 @@
+{% extends 'stories/base.html' %}
+{% load static %}
+{% block title %} story page {% endblock title %}
+
+{% block link %} <link rel="stylesheet" type="text/css" href="{% static 'css/post.css' %}">
+<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">
+	
+	<link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="post">
+		{% for post in story %}
+			
+			{% if post.images.count > 0 %}
+
+			<div class="post__images">
+				{% for i in paginator_images.page_range %}
+				
+				
+				<div class="post__images_postimg postimg">
+					{% for element in paginator_images.page.i.object_list %}
+					
+
+					<div class="postimg__img">
+		           	 	<img src="{{ element.image.url }}">
+		          </div>
+
+					{% endfor %}
+				</div>
+				{% endfor %}
+			</div>
+
+			{% else %}
+				<img src="{{ post.image.url }}">
+			{% endif %}
+
+		<div class="post__text">
+				<h1 class="post__title">{{ post.title }}</h1>	
+				<p>
+					{{ post.content }}
+				</p>
+		</div>
+</div>
+		{% if user.is_staff %}
+		<form method="POST">
+		{% csrf_token %}
+			<div class="remove">
+				<button type="submit">deactivate</button>
+			</div>
+		</form>
+		{% endif %}
+	{% endfor %}
+
+	
+<script type="text/javascript">
+	const postImg = document.querySelectorAll('.postimg__img');
+
+for (let i=0; i < postImg.length; i++) {
+  if (i % 2 === 0) {
+    postImg[i].classList.add('postimg__bigger');
+  } else {
+    postImg[i].classList.add('postimg__smaller')
+  }
+}
+</script>
+	
+{% endblock content %}
+

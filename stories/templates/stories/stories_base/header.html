@@ -1,0 +1,30 @@
+{% load static %}
+
+<header class="top">
+    <img class="top__background" src="{% static 'images/main_bg.png' %}">
+      <div class="top__header header">
+        <div class="header__burger burger">
+          <div class="burger__icon">
+            <span></span>
+          </div>
+        </div>
+        <nav class="header__menu">
+          <ul class="header__list">
+            <li class='header__list_link'>Menu</li>
+            <li class='header__list_link' ><a href="{% url 'home' %}">Home</a></li>
+            {% if request.user.is_staff %}
+              <li class='header__list_link'><a  href="{% url 'admin-page' %}">admin page</a></li>
+            {% endif %}
+            <li class='header__list_link'><a href="{% url 'checkout-page' %}">Donation</a></li>
+          </ul>
+        </nav>
+      </div>
+      {% block header_navbar %}
+        
+      {% endblock header_navbar %}
+    </header>
+
+
+<script type="text/javascript" src="{% static 'js/header.js' %}">
+  
+</script>

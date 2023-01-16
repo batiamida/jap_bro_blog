@@ -1,0 +1,124 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Admin Panel</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/admin_panel_styles.css' %}">
+	</head>
+	<div class="video">
+			<video class="video__item" loop autoplay muted>
+				<source src="{% static  'videos/anime_bg.mp4' %}" type="video/mp4">
+			</video>
+		</div>
+	<body>
+
+		{% if messages  %}
+			{% for message in messages %}
+				<p {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }} </p>
+			{% endfor %}
+		{% endif %}
+		
+
+		
+		<main class="main_create_card create_card">
+			<form method="POST" action='' class = 'create_card__form' enctype="multipart/form-data">
+				{% csrf_token %}
+				<ul class="create_card__list">
+					
+					
+					<li>
+						<h2 class="create_card__title">{{ storyForm.title.name }}</h2>
+						{{ storyForm.title }}
+					</li>
+					
+					<li>
+						<h2 class="create_card__title">{{ storyForm.main_image.name }}</h2>
+						{{ storyForm.main_image }}
+					</li>
+
+					<li>
+						<h2 class="create_card__title">{{ storyForm.images.name }}</h2>
+						{{ storyForm.images }}
+					</li>
+
+					
+					<li>
+						
+						<h2 class="create_card__title">{{ storyForm.description.name }}</h2>
+						{{ storyForm.description }}
+					</li>
+					<li>
+						
+						<h2 class="create_card__title">{{ storyForm.content.name }}</h2>
+						{{ storyForm.content|safe }}
+					</li>
+					<li>
+						
+						<h2 class="create_card__title">{{ storyForm.is_active.name }}</h2>
+						{{ storyForm.is_active }}
+					</li>
+					<li>
+						<h2 class="create_card__title">{{ storyForm.top_3.name }}</h2>
+						{{ storyForm.top_3 }}
+					</li>
+					<div class="create_card__column">
+						
+						<li>
+							<h2 class="create_card__title">{{ storyForm.themes.name }}</h2>
+							{{ storyForm.themes }}
+						</li>
+						<li>
+							<h2 class="create_card__title">{{ storyForm.cities.name }}</h2>
+							{{ storyForm.cities }}
+						</li>
+					</div>
+				</ul>
+
+			
+				
+
+
+				<input class='create_card__submit_button submit_button' type="submit" value='Save' name='create_card'>
+			</form>
+			<div class="create_card__row">
+				<form class="create_card__themes_form create_themes" action="" method="POST">
+					{% csrf_token %}
+					<ul class="create_themes__list">
+						<li>
+							<h2 class="create_themes__title create_card__title">{{ themeForm.theme.name }}</h2>
+							
+							{{ themeForm.theme }}
+							
+						</li>
+					</ul>
+					<input class='create_themes__submit_button submit_button' name='create_theme' value ='Save' type="submit">
+				</form>
+				<form class="create_card__city_form create_city" action='' method='POST'>
+					{% csrf_token %}
+					<ul class="create_themes__list">
+						<li>
+							<h2 class="create_city__title create_card__title">{{ cityForm.city.name }}</h2>
+							
+							{{ cityForm.city }}
+							
+						</li>
+					</ul>
+					<input class='create_city__submit_button submit_button create_themes__submit_button' type="submit" value='Save' name='create_city'>
+				</form>
+			</div>
+		</main>
+		<script type="text/javascript">
+							const input = document.getElementById('id_city');
+								input.addEventListener('keyup', function() {
+								input.value = capitalizeFirstLetter(input.value);
+								console.log(input.value);
+								})
+								//capitalize only the first letter of the string.
+								function capitalizeFirstLetter(string) {
+							return string.charAt(0).toUpperCase() + string.slice(1);
+								}
+		</script>
+	</body>
+</html>
